@@ -1,5 +1,6 @@
 package ru.elcoder
 
+import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.stereotype.Component
@@ -14,7 +15,7 @@ class LoggerInjector : BeanPostProcessor {
         if (bean != null) {
             try {
                 val logField = bean.javaClass.getDeclaredField("log")
-                if (logField != null) {
+                if (logField != null && logField.type.isAssignableFrom(Log::class.java)) {
                     logField.isAccessible = true
                     logField.set(bean, LogFactory.getLog(bean.javaClass))
                 }
