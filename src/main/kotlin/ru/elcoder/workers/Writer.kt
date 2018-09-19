@@ -1,6 +1,6 @@
 package ru.elcoder.workers
 
-import org.apache.commons.logging.LogFactory
+import org.apache.commons.logging.Log
 import org.springframework.stereotype.Component
 import ru.elcoder.bus.EventBus
 import ru.elcoder.bus.EventHandler
@@ -10,10 +10,9 @@ import ru.elcoder.messages.MessageType
 import java.io.File
 import javax.annotation.PostConstruct
 
-private val log = LogFactory.getLog(Writer::class.java)
-
 @Component
 class Writer(private val eventBus: EventBus) {
+    private lateinit var log: Log
 
     @EventHandler(MessageType.WRITE)
     fun handle(message: Message): MessageResult {

@@ -1,5 +1,6 @@
 package ru.elcoder
 
+import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -13,17 +14,15 @@ import ru.elcoder.workers.ArrayReader
 import ru.elcoder.workers.StringReader
 import ru.elcoder.workers.StringReverter
 
-private val log = LogFactory.getLog(Application::class.java)
-
 @SpringBootApplication
 @EnableConfigurationProperties
 @ComponentScan
 open class Application : CommandLineRunner {
-
     @Autowired
     private lateinit var context: ApplicationContext
     @Autowired
     private lateinit var eventBus: EventBus
+    private var log: Log = LogFactory.getLog(this.javaClass)
 
     override fun run(vararg args: String?) {
         log.info("Start")

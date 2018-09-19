@@ -1,6 +1,6 @@
 package ru.elcoder.bus
 
-import org.apache.commons.logging.LogFactory
+import org.apache.commons.logging.Log
 import org.springframework.stereotype.Component
 import ru.elcoder.messages.Message
 import ru.elcoder.messages.MessageResult
@@ -8,11 +8,10 @@ import ru.elcoder.messages.MessageType
 import java.lang.reflect.Method
 import java.util.*
 
-private val log = LogFactory.getLog(EventBus::class.java)
-
 @Component
 class EventBus {
 
+    private lateinit var log: Log
     private val subscribers: MutableList<Subscriber> = ArrayList()
 
     fun publish(message: Message) {
